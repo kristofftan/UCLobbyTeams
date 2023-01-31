@@ -34,6 +34,9 @@ Function Test-UcTeamsDevicesConditionalAccessPolicy {
     $URLTeamsDevicesCA = "aka.ms/TeamsDevicesAndroidPolicies#supported-conditional-access-policies"
     $URLTeamsDevicesKnownIssues = "https://docs.microsoft.com/microsoftteams/troubleshoot/teams-rooms-and-devices/rooms-known-issues#teams-phone-devices"
 
+    $GraphModule = Get-Module -Name Microsoft.Graph
+    if ($GraphModule -eq $null){Install-Module Microsoft.Graph -Force -AllowClobber}
+
     $scopes = (Get-MgContext).Scopes
 
     if (!($scopes) -or !( "Policy.Read.All" -in $scopes )) {
